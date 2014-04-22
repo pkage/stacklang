@@ -1,0 +1,13 @@
+
+func hw v
+print "hello world\nwhat is your name: "
+get [100]
+print "hello "
+print [100]
+end
+
+print "hello worlding...\n\n"
+hw()
+
+
+
