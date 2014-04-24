@@ -30,10 +30,10 @@ namespace ahndlr {
 				impl::version();
 				return;
 			}
-			if (arg == "-a" || arg == "--arguments") {
+			if ((arg == "-a" || arg == "--arguments") && c + 1 != argc) {
 				pf.set_args(argv[c + 1]);
 			}
-			if (arg == "-f" || arg == "--file") {
+			if ((arg == "-f" || arg == "--file") && c + 1 != argc) {
 				pf.set_filename(argv[c + 1]);
 			}
 			if (arg == "-i" || arg == "--interactive") {
