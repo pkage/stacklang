@@ -20,7 +20,7 @@ namespace ahndlr {
 	}
 
 
-	void director(int argc, char** argv) { // toss main() args in here
+	int director(int argc, char** argv) { // toss main() args in here
 		std::string arg;
 		bool interactive = false;
 		ProgramFile pf;
@@ -28,7 +28,7 @@ namespace ahndlr {
 			arg = argv[c];
 			if (arg == "-v" || arg == "--version") {
 				impl::version();
-				return;
+				return 0;
 			}
 			if ((arg == "-a" || arg == "--arguments") && c + 1 != argc) {
 				pf.set_args(argv[c + 1]);
@@ -41,9 +41,9 @@ namespace ahndlr {
 			}
 		}
 		if (interactive) {
-			iprompt();
+			return iprompt();
 		} else {
-			fprompt(pf);
+			return fprompt(pf);
 		}
 	}
 
