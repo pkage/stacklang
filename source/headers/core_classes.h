@@ -85,7 +85,11 @@ public:
 	std::string get_all_args() {
 		std::string tmp = "";
 		for (int c = 1; c < arg_count(); c++) {
-			tmp += get_arg(c);
+			if (c == 1) {
+				tmp += get_arg(c);
+			} else {
+				tmp += " " + get_arg(c);
+			}
 		}
 		return tmp;
 	}
