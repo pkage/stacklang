@@ -11,6 +11,8 @@
 
 #include "core_io.h"
 #include "core_tools.h"
+#include "core_errors.h"
+#include "core_classes.h"
 
 namespace impl {
 	void print(std::string str) {
@@ -26,7 +28,15 @@ namespace impl {
 					io::print(str.at(c));
 				}
 			}
+			return;
 		}
+		int tmp = tools::get_mem_slot(str);
+		if (tmp != -1) {
+			io::print(reg[tmp].stringify(reg[tmp].type));
+			return;
+		}
+		err::throw_error("Invalid expression!", true);
+		return;
 	}
 	
 
