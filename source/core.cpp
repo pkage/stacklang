@@ -54,9 +54,10 @@ int fprompt(ProgramFile pf) {
 		}
 		if (err::error_thrown) {
 			if (err::fatal) {
-				io::log::fatal(err::error_description + "[line " + tools::itos(c + 1) + "]");
+				io::log::fatal(err::error_description + " [line " + tools::itos(c + 1) + "]");
+				return 1;
 			} else {
-				io::log::error(err::error_description + "[line " + tools::itos(c + 1) + "] [attempting to continue execution]");
+				io::log::error(err::error_description + " [line " + tools::itos(c + 1) + "] [attempting to continue execution]");
 			}
 		}
 	}
@@ -74,6 +75,7 @@ int director(Parser ps) {
 	} else if (ps.get_arg(0) == "print") {
 		impl::print(ps.get_all_args());
 	} else {
+		err::throw_error("unknown function or operator \"" + ps.get_original() + "\"", true);
 		return 1;
 	}
 	return 0;
