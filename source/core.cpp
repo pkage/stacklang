@@ -5,11 +5,11 @@
 #include "headers/core_classes.h"
 int fprompt(ProgramFile pf);
 int iprompt();
+MemorySlot reg[SL_STACKSIZE];
 #include "headers/allheaders.h"
 
 using namespace std;
 
-MemorySlot reg[SL_STACKSIZE];
 
 // prototypes
 int director(Parser ps);
@@ -69,7 +69,7 @@ int director(Parser ps) {
 	if (ps.get_arg(0) == "") {
 		// do nothing
 	} else if (ps.get_arg(0) == "print") {
-		impl::print(ps.get_arg(1));
+		impl::print(ps.get_all_args());
 	} else {
 		return 1;
 	}
