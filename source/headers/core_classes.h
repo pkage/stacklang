@@ -36,7 +36,8 @@ public:
 		if (type == 0) {
 			return tools::itos(f);
 		} else if (type == 1) {
-			return std::string(c);
+			std::string tmp = ""; tmp += c;
+			return std::string(tmp);
 		} else if (type == 2) {
 			return s;
 		} else {
