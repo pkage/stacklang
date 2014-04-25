@@ -90,8 +90,10 @@ public:
 class Parser { // utility class for handling lines
 private:
 	std::vector<std::string> args;
+	std::string orig;
 public:
 	void parse(std::string command) { // parse a command and dump it into the vector
+		orig = command;
 		while (command.find(" ") != -1) {
 			args.push_back(command.substr(0, command.find(" ")));
 			command = command.substr(command.find(" ") + 1);
@@ -99,8 +101,10 @@ public:
 		args.push_back(command);
 	}
 	void reset() {
+		orig = "";
 		args.clear();
 	}
+	std::string get_original() {return orig;}
 	int arg_count() {
 		return args.size();
 	}
