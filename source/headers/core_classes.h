@@ -8,14 +8,29 @@
 class MemorySlot {
 public:
 	// info
-	int type; // 0 = int; 1 = float; 2 = char; 3 = string
+	int type; // 0 = float; 1 = char; 2 = string
 	bool valid; //  is the slot valid. prevents reading stray bits
 	
 	// data
-	int i;
 	float f;
 	char c;
 	std::string s;
+	void write(float fl) {
+		type = 0;
+		f = fl;
+	}
+	void write(char ch) {
+		type = 1;
+		c = ch;
+	}
+	void write(std::string str) {
+		type = 2;
+		s = str;
+	}
+	void read(float &fl) {fl = f;}
+	void read(char &ch) {ch = c;}
+	void read(std::string &str) {str = s;}
+	void init() {f = 0.0; c = '\0'; s = "";}
 };
 
 class ProgramFile { // utility class to load entire files into memory before execution
