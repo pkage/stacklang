@@ -54,6 +54,7 @@ public:
 	void set_args(std::string args) {
 		this->args = args;
 	}
+	int get_length() {return contents.size();}
 	std::string get_args() {return args;}
 };
 
@@ -63,13 +64,14 @@ private:
 	std::vector<std::string> args;
 public:
 	void parse(std::string command) { // parse a command and dump it into the vector
-		int tmp;
 		while (command.find(" ") != -1) {
-		//	tmp = command.find(" ");
 			args.push_back(command.substr(0, command.find(" ")));
 			command = command.substr(command.find(" ") + 1);
 		}
 		args.push_back(command);
+	}
+	void reset() {
+		args.clear();
 	}
 /*	void DBG_print() { // debug function
 		cout << "\n{";
