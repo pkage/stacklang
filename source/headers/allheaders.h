@@ -7,3 +7,5 @@
 #include "core_classes.h"
 #include "core_io.h"
 #include "core_ahandlers.h"
+#include "core_errors.h"
+#include "core_tools.h"
