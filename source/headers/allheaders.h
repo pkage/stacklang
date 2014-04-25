@@ -10,3 +10,4 @@
 #include "core_errors.h"
 #include "core_tools.h"
 #include "core_impl.h"
+#include "core_flags.h"
