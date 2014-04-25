@@ -82,6 +82,13 @@ public:
 		}
 		return args.at(a);
 	}
+	std::string get_all_args() {
+		std::string tmp = "";
+		for (int c = 1; c < arg_count(); c++) {
+			tmp += get_arg(c);
+		}
+		return tmp;
+	}
 /*	void DBG_print() { // debug function
 		cout << "\n{";
 		for (int c = 0; c < args.size(); c++) {
