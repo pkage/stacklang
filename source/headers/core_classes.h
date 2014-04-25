@@ -73,6 +73,15 @@ public:
 	void reset() {
 		args.clear();
 	}
+	int arg_count() {
+		return args.size();
+	}
+	std::string get_arg(int a) {
+		if (a > arg_count()) {
+			return "";
+		}
+		return args.at(a);
+	}
 /*	void DBG_print() { // debug function
 		cout << "\n{";
 		for (int c = 0; c < args.size(); c++) {
