@@ -13,6 +13,14 @@ namespace tools {
 		ss << f;
 		return ss.str();
 	}
+	bool strip_quotes(std::string &str) {
+		if (str.at(0) == '\"' && str.at(str.length() - 1) == '\"') {
+			str = str.substr(1, str.length() - 2);
+			return true;
+		} else {
+			return false;
+		}	
+	}
 
 }
 
