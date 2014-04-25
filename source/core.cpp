@@ -70,7 +70,7 @@ int iprompt() {
 }
 
 int director(Parser ps) {
-	if (ps.get_arg(0) == "") {
+	if (ps.get_arg(0) == "" || ps.get_arg(0) == "label") {
 		// do nothing
 	} else if (ps.get_arg(0) == "print") {
 		impl::print(ps.get_all_args());
