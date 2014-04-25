@@ -47,7 +47,7 @@ int fprompt(ProgramFile pf) {
 			if (tmp != -1) {
 				c = tmp;
 			} else {
-				err::throw_error(string("no label \"") + ps.get_arg(1), true);
+				err::throw_error(string("no such label \"") + ps.get_arg(1) + "\"", true);
 			}
 		} else {
 			director(ps);
