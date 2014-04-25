@@ -3,6 +3,8 @@
 
 #include <sstream>
 #include <cstdlib>
+#include "core_errors.h"
+#include "pp_defs.h"
 
 namespace tools {
 	int stoi(std::string s) {
@@ -21,7 +23,18 @@ namespace tools {
 			return false;
 		}	
 	}
-
+	int get_mem_slot(std::string str) { // return slot if it is a slot, return -1 otherwise;
+		if (str.at(c) == '[' && str.at(str.length() - 1) == ']') {
+			str = str.substr(1, str.length() - 2);
+			if (itos(str) >= 0 && itos(str) < SL_STACKSIZE) {
+				return itos(str);
+			} else {
+				return -1; // slot out of bounds
+			}
+		} else {
+			return -1; // invalid slot syntax
+		}
+	}
 }
 
 
