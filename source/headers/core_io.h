@@ -34,16 +34,16 @@ namespace io {
 	}
 	namespace log {
 		void error(std::string s) {
-			print("[ERROR]: " + s + "\n");
+			print("\n[ERROR]: " + s + "\n");
 		}
 		void warning(std::string s) {
-			print("[WARNING]: " + s + "\n");
+			print("\n[WARNING]: " + s + "\n");
 		}
 		void info(std::string s) {
-			print("[INFO]: " + s + "\n");
+			print("\n[INFO]: " + s + "\n");
 		}
 		void fatal(std::string s) {
-			print("[FATAL]: " + s + "\n");
+			print("\n[FATAL]: " + s + "\n");
 		}
 	}
 }
