@@ -24,10 +24,10 @@ namespace tools {
 		}	
 	}
 	int get_mem_slot(std::string str) { // return slot if it is a slot, return -1 otherwise;
-		if (str.at(c) == '[' && str.at(str.length() - 1) == ']') {
+		if (str.at(0) == '[' && str.at(str.length() - 1) == ']') {
 			str = str.substr(1, str.length() - 2);
-			if (itos(str) >= 0 && itos(str) < SL_STACKSIZE) {
-				return itos(str);
+			if (stoi(str) >= 0 && stoi(str) < SL_STACKSIZE) {
+				return stoi(str);
 			} else {
 				return -1; // slot out of bounds
 			}
