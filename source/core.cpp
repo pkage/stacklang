@@ -66,7 +66,13 @@ int iprompt() {
 }
 
 int director(Parser ps) {
-	
+	if (ps.get_arg(0) == "") {
+		// do nothing
+	} else if (ps.get_arg(0) == "print") {
+		impl::print(ps.get_arg(1));
+	} else {
+		return 1;
+	}
 	return 0;
 }
 
