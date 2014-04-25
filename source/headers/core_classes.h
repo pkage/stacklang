@@ -4,6 +4,7 @@
 #include <string.h>
 #include <vector>
 #include <fstream>
+#include "core_tools.h"
 
 class MemorySlot {
 public:
@@ -31,6 +32,17 @@ public:
 	void read(char &ch) {ch = c;}
 	void read(std::string &str) {str = s;}
 	void init() {f = 0.0; c = '\0'; s = "";}
+	std::string stringify(int type) {
+		if (type == 0) {
+			return tools::itos(f);
+		} else if (type == 1) {
+			return std::string(c);
+		} else if (type == 2) {
+			return s;
+		} else {
+			return "";
+		}
+	}
 };
 
 class ProgramFile { // utility class to load entire files into memory before execution
