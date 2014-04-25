@@ -3,6 +3,7 @@
 
 // begin header-fu
 #include "headers/core_classes.h"
+#include "headers/pp_defs.h"
 int fprompt(ProgramFile pf);
 int iprompt();
 MemorySlot reg[SL_STACKSIZE];
@@ -14,8 +15,10 @@ using namespace std;
 // prototypes
 int director(Parser ps);
 int find_label(ProgramFile &pf, string term);
+void init_stack();
 
 int main(int argc, char** argv) {
+	init_stack();
 	return ahndlr::director(argc, argv);
 }
 
@@ -86,4 +89,10 @@ int find_label(ProgramFile &pf, string term) {
 		}
 	}
 	return -1;
+}
+
+void init_stack() {
+	for (int c = 0; c < SL_STACKSIZE; c++) {
+		reg[c].init();
+	}
 }
