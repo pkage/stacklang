@@ -6,10 +6,10 @@
 
 namespace tools {
 	int stoi(std::string s) {
-		return atoi(s.c_str());
+		return std::atoi(s.c_str());
 	}
-	string itos(float f) {
-		stringstream ss;
+	std::string itos(float f) {
+		std::stringstream ss;
 		ss << f;
 		return ss.str();
 	}
