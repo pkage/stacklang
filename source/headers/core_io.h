@@ -42,6 +42,9 @@ namespace io {
 		void info(std::string s) {
 			print("[INFO]: " + s + "\n");
 		}
+		void fatal(std::string s) {
+			print("[FATAL]: " + s + "\n");
+		}
 	}
 }
 
