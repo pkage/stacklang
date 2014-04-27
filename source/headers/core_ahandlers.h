@@ -10,7 +10,7 @@
 #include "pp_defs.h"
 #include "core_io.h"
 #include "core_classes.h"
-
+#include "core_flags.h"
 
 namespace ahndlr {
 	namespace impl {
@@ -38,6 +38,10 @@ namespace ahndlr {
 			}
 			if (arg == "-i" || arg == "--interactive") {
 				interactive = true;
+			}
+			if (arg == "--fuckit") {
+				flags::IGNORE_ERRORS = true;
+				flags::SILENCE_ERRORS = true;
 			}
 		}
 		if (interactive) {

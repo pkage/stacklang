@@ -10,6 +10,7 @@
 #include <sstream>
 
 #include "core_classes.h"
+#include "core_flags.h"
 
 namespace io {
 	void print(std::string s) {
@@ -34,16 +35,16 @@ namespace io {
 	}
 	namespace log {
 		void error(std::string s) {
-			print("\n[ERROR]: " + s + "\n");
+			if (!flags::SILENCE_ERRORS) {print("\n[ERROR]: " + s + "\n");}
 		}
 		void warning(std::string s) {
-			print("\n[WARNING]: " + s + "\n");
+			if (!flags::SILENCE_ERRORS) {print("\n[WARNING]: " + s + "\n");}
 		}
 		void info(std::string s) {
 			print("\n[INFO]: " + s + "\n");
 		}
 		void fatal(std::string s) {
-			print("\n[FATAL]: " + s + "\n");
+			if (!flags::SILENCE_ERRORS) {print("\n[FATAL]: " + s + "\n");}
 		}
 	}
 }

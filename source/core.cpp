@@ -55,7 +55,7 @@ int fprompt(ProgramFile pf) {
 		if (err::error_thrown) {
 			if (err::fatal) {
 				io::log::fatal(err::error_description + " [line " + tools::itos(c + 1) + "]");
-				return 1;
+				if (!flags::IGNORE_ERRORS) {return 1;}
 			} else {
 				io::log::error(err::error_description + " [line " + tools::itos(c + 1) + "] [attempting to continue execution]");
 			}
