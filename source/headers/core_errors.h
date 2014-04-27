@@ -12,6 +12,9 @@ namespace err { // error messaging system
 		error_description = error;
 		fatal = fatal_;
 	}
+	void throw_error(std::string error) {
+		throw_error(error, true);
+	}
 };
 
 #endif
