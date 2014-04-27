@@ -38,7 +38,39 @@ namespace impl {
 		err::throw_error("Invalid expression!", true);
 		return;
 	}
-	
+	void write(Parser ps) {
+		if (ps.arg_count() != 3) {
+			err::throw_error("Invalid syntax!", true); 
+			return;	
+		}
+		std::string value, slot;
+		value = ps.get_arg(1);
+		slot = ps.get_arg(2); 
+		if (slot.at(0) != '[' || slot.at(slot.length() - 1) != ']') { // check if slot has [ ]
+			err::throw_error("Invalid slot!", true);
+			return;
+		}
+		slot = slot.substr(1,slot.length() - 2); // trim down to slot num
+		int addr = tools::stoi(slot); // get the slot as an integer
+		if (addr == -1) {
+			if (slot.at(0) == '[' && slot.at(0) == ']') {
+				slot = slot.substr(1,slot.length() - 2); // trim down to secondary slot #
+				addr = tools::stoi(slot);
+				if (addr < 0 || addr >= SL_STACKSIZE) {
+					err::throw_error("Invalid address!");
+					return;
+				}
+				if (reg[addr].type != 0) {
+					err::throw_error("Nested slot has invalid type!");
+					return;
+				}
+				addr = reg[addr].read(0);
+			}
+		} else {
+			err::throw_error("Invalid address!");	
+			return;
+		}
+	}
 
 }
 
