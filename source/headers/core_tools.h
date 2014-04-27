@@ -26,8 +26,8 @@ namespace tools {
 	int get_mem_slot(std::string str) { // return slot if it is a slot, return -1 otherwise;
 		if (str.at(0) == '[' && str.at(str.length() - 1) == ']') {
 			str = str.substr(1, str.length() - 2);
-			if (stoi(str) >= 0 && stoi(str) < SL_STACKSIZE) {
-				return stoi(str);
+			if (tools::stoi(str) >= 0 && tools::stoi(str) < SL_STACKSIZE) {
+				return tools::stoi(str);
 			} else {
 				return -1; // slot out of bounds
 			}
