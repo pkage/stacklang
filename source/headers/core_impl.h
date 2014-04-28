@@ -34,6 +34,10 @@ namespace impl {
 		}
 		int tmp = tools::get_mem_slot(str);
 		if (tmp != -1) {
+			if (tmp < 0 || tmp >= SL_STACKSIZE) {
+				err::throw_error("out of bounds!");
+				return;
+			}
 			io::print(reg[tmp].stringify(reg[tmp].type));
 			return;
 		}
