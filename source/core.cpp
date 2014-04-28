@@ -93,6 +93,8 @@ int director(Parser ps) {
 		impl::print(ps.get_all_args());
 	} else if (ps.get_arg(0) == "write") {
 		impl::write(ps);
+	} else if (ps.get_arg(0).at(0) == '[') {
+		impl::math_handler(ps);
 	} else {
 		err::throw_error("unknown function or operator \"" + ps.get_original() + "\"", true);
 		return 1;

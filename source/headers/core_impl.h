@@ -88,7 +88,64 @@ namespace impl {
 		}
 		return;
 	}
-
+	void math_handler(Parser ps) {
+		if (ps.arg_count() != 3) {
+			err::throw_error("Syntax error!");
+			return;
+		}
+		std::string lvalue, operand = ps.get_arg(1), rvalue = ps.get_arg(2);
+		float lvalue_real, rvalue_real;
+		lvalue = ps.get_arg(0);
+		if (lvalue.at(0) != '[' || lvalue.at(lvalue.length() - 1) != ']') {
+			err::throw_error("Invalid lvalue!");
+			return;
+		}
+		if (!tools::isanum(lvalue.substr(1,lvalue.length() - 2))) {
+			err::throw_error("Invalid lvalue address!");
+			return;
+		}
+		int addr = tools::stoi(lvalue.substr(1,lvalue.length() - 2));
+		if (addr < 0 || addr >= SL_STACKSIZE) {
+			err::throw_error("Invalid lvalue!");
+			return;
+		}
+		reg[addr].read(lvalue_real);
+	//	std::cout << "\nExtracted lvalue:" << lvalue_real << "\n";
+		if (rvalue.at(0) == '[' && rvalue.at(rvalue.length() - 1) == ']') {
+			if (tools::isanum(rvalue.substr(1,rvalue.length() - 2))) {
+				reg[tools::stoi(rvalue.substr(1,rvalue.length() - 2))].read(rvalue_real);
+			} else {
+				err::throw_error("Invalid rvalue address!");
+				return;
+			}
+		} else if (tools::isanum(rvalue)) {
+			rvalue_real = tools::stof(rvalue);
+		} else {
+			err::throw_error("Invalid rvalue!");
+		}
+	//	std::cout << "\nExtracted rvalue:" << rvalue_real << "\n";
+		if (operand == "=") {
+			reg[addr].write(rvalue_real);
+		} else if (operand == "+=") {
+			reg[addr].write(lvalue_real + rvalue_real);
+		} else if (operand == "-=") {
+			reg[addr].write(lvalue_real - rvalue_real);
+		} else if (operand == "*=") {
+			reg[addr].write(lvalue_real * rvalue_real);
+		} else if (operand == "/=") {
+			if (rvalue_real == 0) {
+				err::throw_error("Divide by zero!");
+				return;
+			}
+			reg[addr].write(lvalue_real / rvalue_real);
+		} else if (operand == "%=") {
+			reg[addr].write((float)((int)floor(lvalue_real) % (int)floor(rvalue_real)));
+		} else {
+			err::throw_error("\"" + operand + "\" is not a valid operator!");
+			return;
+		}
+		return;
+	}
 }
 
 
