@@ -55,18 +55,35 @@ int fprompt(ProgramFile pf) {
 		if (err::error_thrown) {
 			if (err::fatal) {
 				io::log::fatal(err::error_description + " [line " + tools::itos(c + 1) + "]");
-				if (!flags::IGNORE_ERRORS) {return 1;}
 			} else {
 				io::log::error(err::error_description + " [line " + tools::itos(c + 1) + "] [attempting to continue execution]");
 			}
+			err::error_thrown = false;
 		}
 	}
 	return 0;
 }
 
 int iprompt() {
-	io::log::error("Interactive mode is not yet implemented!");
-	return 1;
+	Parser ps;
+	std::string input;
+	io::print("Starting interactive mode...\n");
+	while (input != "quit") {
+		io::print("\n: ");
+		input = io::get();
+		ps.reset();
+		ps.parse(input);
+		director(ps);
+		if (err::error_thrown) {
+			if (err::fatal) {
+				io::log::fatal(err::error_description);
+			} else {
+				io::log::error(err::error_description + " [attempting to continue execution]");
+			}
+			err::error_thrown = false;
+		}
+	}
+	return 0;
 }
 
 int director(Parser ps) {
@@ -74,6 +91,8 @@ int director(Parser ps) {
 		// do nothing
 	} else if (ps.get_arg(0) == "print") {
 		impl::print(ps.get_all_args());
+	} else if (ps.get_arg(0) == "write") {
+		impl::write(ps);
 	} else {
 		err::throw_error("unknown function or operator \"" + ps.get_original() + "\"", true);
 		return 1;

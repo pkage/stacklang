@@ -17,6 +17,7 @@
 
 namespace impl {
 	void print(std::string str) {
+		if (str.length() == 0 || str.length() == 1) {return;}
 		if (tools::strip_quotes(str)) {
 			for (int c = 0; c < str.length(); c++) {
 				if (str.at(c) == '\\') {
