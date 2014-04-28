@@ -13,6 +13,7 @@
 #include "core_tools.h"
 #include "core_errors.h"
 #include "core_classes.h"
+#include <cmath>
 
 namespace impl {
 	void print(std::string str) {
@@ -52,8 +53,8 @@ namespace impl {
 		}
 		slot = slot.substr(1,slot.length() - 2); // trim down to slot num
 		int addr = tools::stoi(slot); // get the slot as an integer
-		if (addr == -1) {
-			if (slot.at(0) == '[' && slot.at(0) == ']') {
+		if (addr == 0) {
+			if (slot.at(0) == '[' && slot.at(slot.length() - 1) == ']') {
 				slot = slot.substr(1,slot.length() - 2); // trim down to secondary slot #
 				addr = tools::stoi(slot);
 				if (addr < 0 || addr >= SL_STACKSIZE) {
@@ -64,12 +65,27 @@ namespace impl {
 					err::throw_error("Nested slot has invalid type!");
 					return;
 				}
-				addr = reg[addr].read(0);
+				if (reg[addr].type == 0) {
+					float tfl = (float)addr;
+					reg[addr].read(tfl);
+					addr = (int)tfl;
+				}
+			} else {
+				err::throw_error("Invalid nested address!");	
+				return;
 			}
+		}
+		if (value.at(0) == '\'' && value.at(value.length() - 1) == '\'' && value.length() == 3) {
+			reg[addr].write(value.at(1));
+		} else if (value.at(0) == '\"' && value.at(value.length() - 1) ) {
+			reg[addr].write(value.substr(1, value.length() - 2));
+		} else if (tools::isanum(value)) {
+			reg[addr].write(tools::stof(value));
 		} else {
-			err::throw_error("Invalid address!");	
+			err::throw_error("Syntax error!");
 			return;
 		}
+		return;
 	}
 
 }
