@@ -43,6 +43,9 @@ namespace ahndlr {
 				flags::IGNORE_ERRORS = true;
 				flags::SILENCE_ERRORS = true;
 			}
+			if (arg == "--silenterr") {
+				flags::IGNORE_ERRORS = true;
+			}
 		}
 		if (interactive) {
 			return iprompt();
