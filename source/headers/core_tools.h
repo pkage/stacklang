@@ -10,6 +10,9 @@ namespace tools {
 	int stoi(std::string s) {
 		return std::atoi(s.c_str());
 	}
+	float stof(std::string s) {
+		return std::atof(s.c_str());
+	}
 	std::string itos(float f) {
 		std::stringstream ss;
 		ss << f;
@@ -34,6 +37,13 @@ namespace tools {
 		} else {
 			return -1; // invalid slot syntax
 		}
+	}
+	bool isanum(std::string str) {
+		std::string nums = ".0123456789";
+		for (int c = 0; c < str.length(); c++) {
+			if (nums.find(str.at(c)) == -1) {return false;}
+		}
+		return true;
 	}
 }
 
