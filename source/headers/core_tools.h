@@ -45,6 +45,17 @@ namespace tools {
 		}
 		return true;
 	}
+	int get_type(std::string str) {
+		if (str.at(0) == '\"' && str.at(str.length() - 1) == '\"') {
+			return 2;
+		} else if (str.length() == 3 && str.at(0) == '\'' && str.at(str.length() - 1)) {
+			return 1;
+		} else if (tools::isanum(str)) {
+			return 0;
+		} else {
+			return -1;
+		}
+	}
 }
 
 
