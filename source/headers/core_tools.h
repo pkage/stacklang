@@ -56,6 +56,9 @@ namespace tools {
 			return -1;
 		}
 	}
+	char extract_char(std::string str) {
+		
+	}
 }
 
 

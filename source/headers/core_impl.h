@@ -150,6 +150,57 @@ namespace impl {
 		}
 		return;
 	}
+	void get(std::string arg) {
+		int addr = tools::get_mem_slot(arg);
+		if (addr == -1) {
+			err::throw_error("Invalid address!");
+			return;
+		}
+		reg[addr].write(io::get());
+	}
+	bool compare(Parser ps) {
+		if (ps.arg_count() != 3) {
+			err::throw_error("Invalid syntax!");
+			return false;
+		}
+		std::string lval, operand, rval;
+		lval = ps.get_arg(0);
+		operand = ps.get_arg(1);
+		rval = ps.get_arg(2);
+		if (tools::get_mem_slot(lval) == -1) {
+			err::throw_error("Invalid lvalue!");
+			return false;
+		}
+		MemorySlot rv, lv;
+		lv = reg[tools::get_mem_slot(lval)];
+		
+		if (tools::get_mem_slot(rval) == -1) {
+			int type = tools::get_type(rval);
+			switch (type) {
+				case 0:
+					float fl = tools::stof(rval);
+					rv.write(fl);
+					break;
+				case 1:
+					char c = 
+		}
+		if (operand == "==") {
+			return (lv == rv);
+		} else if (operand == ">") {
+			return (lv > rv);
+		} else if (operand == "<") {
+			return (lv < rv);
+		} else if (operand == ">=") {
+			return (lv >= rv);
+		} else if (operand == "<=") {
+			return (lv <= rv);
+		} else if (operand == "!=") {
+			return (lv != rv);
+		} else {
+			err::throw_error("Invalid operand!");
+			return false;
+		}
+	}
 }
 
 

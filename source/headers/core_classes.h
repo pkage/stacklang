@@ -10,7 +10,6 @@ class MemorySlot {
 public:
 	// info
 	int type; // 0 = float; 1 = char; 2 = string
-	bool valid; //  is the slot valid. prevents reading stray bits
 	
 	// data
 	float f;
@@ -43,6 +42,23 @@ public:
 		} else {
 			return "";
 		}
+	}
+	void trim() {
+		switch (type) {
+			case 0:	
+				c = '\0'
+				s = "";
+				break;
+			case 1:
+				f = 0.0;
+				s = "";
+				break;
+			case 2:
+				f = 0.0;
+				c = '\0';
+				break;
+		}
+		return;
 	}
 };
 
